@@ -183,8 +183,9 @@ export function AppShell({ children }: { children: ReactNode }) {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-
+            </div>
           </header>
+
           <div className="px-4 lg:px-8 py-6">{children}</div>
         </main>
       </div>
