@@ -93,12 +93,9 @@ const chartColors = [
   "var(--chart-5)",
 ];
 
-const kpis = [
-  { label: "Revenue today", value: "₹41,200", delta: 12.4, icon: IndianRupee, up: true },
-  { label: "Appointments", value: "33", delta: 8.1, icon: CalendarCheck2, up: true },
-  { label: "New clients", value: "9", delta: -3.2, icon: Users, up: false },
-  { label: "Retention rate", value: "68%", delta: 2.6, icon: Repeat, up: true },
-];
+function formatINR(n: number) {
+  return `₹${n.toLocaleString("en-IN")}`;
+}
 
 function statusBadge(s: string) {
   if (s === "confirmed")
