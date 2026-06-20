@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedServicesRouteImport } from './routes/_authenticated/services'
@@ -24,84 +25,89 @@ import { Route as AuthenticatedWhatsappLogsRouteImport } from './routes/_authent
 import { Route as AuthenticatedWhatsappCampaignsRouteImport } from './routes/_authenticated/whatsapp.campaigns'
 import { Route as AuthenticatedWhatsappAutomationRouteImport } from './routes/_authenticated/whatsapp.automation'
 
-const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
-  id: '/_authenticated/',
-  path: '/',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
-  id: '/_authenticated/settings',
+  id: '/settings',
   path: '/settings',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedServicesRoute = AuthenticatedServicesRouteImport.update({
-  id: '/_authenticated/services',
+  id: '/services',
   path: '/services',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedReportsRoute = AuthenticatedReportsRouteImport.update({
-  id: '/_authenticated/reports',
+  id: '/reports',
   path: '/reports',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedPaymentsRoute = AuthenticatedPaymentsRouteImport.update({
-  id: '/_authenticated/payments',
+  id: '/payments',
   path: '/payments',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedMarketingRoute = AuthenticatedMarketingRouteImport.update({
-  id: '/_authenticated/marketing',
+  id: '/marketing',
   path: '/marketing',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedInventoryRoute = AuthenticatedInventoryRouteImport.update({
-  id: '/_authenticated/inventory',
+  id: '/inventory',
   path: '/inventory',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedClientsRoute = AuthenticatedClientsRouteImport.update({
-  id: '/_authenticated/clients',
+  id: '/clients',
   path: '/clients',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAppointmentsRoute =
   AuthenticatedAppointmentsRouteImport.update({
-    id: '/_authenticated/appointments',
+    id: '/appointments',
     path: '/appointments',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedWhatsappIndexRoute =
   AuthenticatedWhatsappIndexRouteImport.update({
-    id: '/_authenticated/whatsapp/',
+    id: '/whatsapp/',
     path: '/whatsapp/',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedWhatsappTemplatesRoute =
   AuthenticatedWhatsappTemplatesRouteImport.update({
-    id: '/_authenticated/whatsapp/templates',
+    id: '/whatsapp/templates',
     path: '/whatsapp/templates',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedWhatsappLogsRoute =
   AuthenticatedWhatsappLogsRouteImport.update({
-    id: '/_authenticated/whatsapp/logs',
+    id: '/whatsapp/logs',
     path: '/whatsapp/logs',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedWhatsappCampaignsRoute =
   AuthenticatedWhatsappCampaignsRouteImport.update({
-    id: '/_authenticated/whatsapp/campaigns',
+    id: '/whatsapp/campaigns',
     path: '/whatsapp/campaigns',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedWhatsappAutomationRoute =
   AuthenticatedWhatsappAutomationRouteImport.update({
-    id: '/_authenticated/whatsapp/automation',
+    id: '/whatsapp/automation',
     path: '/whatsapp/automation',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof AuthenticatedIndexRoute
   '/appointments': typeof AuthenticatedAppointmentsRoute
   '/clients': typeof AuthenticatedClientsRoute
   '/inventory': typeof AuthenticatedInventoryRoute
@@ -110,7 +116,6 @@ export interface FileRoutesByFullPath {
   '/reports': typeof AuthenticatedReportsRoute
   '/services': typeof AuthenticatedServicesRoute
   '/settings': typeof AuthenticatedSettingsRoute
-  '/': typeof AuthenticatedIndexRoute
   '/whatsapp/automation': typeof AuthenticatedWhatsappAutomationRoute
   '/whatsapp/campaigns': typeof AuthenticatedWhatsappCampaignsRoute
   '/whatsapp/logs': typeof AuthenticatedWhatsappLogsRoute
@@ -135,6 +140,7 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/_authenticated/appointments': typeof AuthenticatedAppointmentsRoute
   '/_authenticated/clients': typeof AuthenticatedClientsRoute
   '/_authenticated/inventory': typeof AuthenticatedInventoryRoute
@@ -153,6 +159,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
     | '/appointments'
     | '/clients'
     | '/inventory'
@@ -161,7 +168,6 @@ export interface FileRouteTypes {
     | '/reports'
     | '/services'
     | '/settings'
-    | '/'
     | '/whatsapp/automation'
     | '/whatsapp/campaigns'
     | '/whatsapp/logs'
@@ -185,6 +191,7 @@ export interface FileRouteTypes {
     | '/whatsapp'
   id:
     | '__root__'
+    | '/_authenticated'
     | '/_authenticated/appointments'
     | '/_authenticated/clients'
     | '/_authenticated/inventory'
@@ -202,6 +209,120 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/': {
+      id: '/_authenticated/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/services': {
+      id: '/_authenticated/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof AuthenticatedServicesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/reports': {
+      id: '/_authenticated/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof AuthenticatedReportsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/payments': {
+      id: '/_authenticated/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof AuthenticatedPaymentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/marketing': {
+      id: '/_authenticated/marketing'
+      path: '/marketing'
+      fullPath: '/marketing'
+      preLoaderRoute: typeof AuthenticatedMarketingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/inventory': {
+      id: '/_authenticated/inventory'
+      path: '/inventory'
+      fullPath: '/inventory'
+      preLoaderRoute: typeof AuthenticatedInventoryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/clients': {
+      id: '/_authenticated/clients'
+      path: '/clients'
+      fullPath: '/clients'
+      preLoaderRoute: typeof AuthenticatedClientsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/appointments': {
+      id: '/_authenticated/appointments'
+      path: '/appointments'
+      fullPath: '/appointments'
+      preLoaderRoute: typeof AuthenticatedAppointmentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/whatsapp/': {
+      id: '/_authenticated/whatsapp/'
+      path: '/whatsapp'
+      fullPath: '/whatsapp/'
+      preLoaderRoute: typeof AuthenticatedWhatsappIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/whatsapp/templates': {
+      id: '/_authenticated/whatsapp/templates'
+      path: '/whatsapp/templates'
+      fullPath: '/whatsapp/templates'
+      preLoaderRoute: typeof AuthenticatedWhatsappTemplatesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/whatsapp/logs': {
+      id: '/_authenticated/whatsapp/logs'
+      path: '/whatsapp/logs'
+      fullPath: '/whatsapp/logs'
+      preLoaderRoute: typeof AuthenticatedWhatsappLogsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/whatsapp/campaigns': {
+      id: '/_authenticated/whatsapp/campaigns'
+      path: '/whatsapp/campaigns'
+      fullPath: '/whatsapp/campaigns'
+      preLoaderRoute: typeof AuthenticatedWhatsappCampaignsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/whatsapp/automation': {
+      id: '/_authenticated/whatsapp/automation'
+      path: '/whatsapp/automation'
+      fullPath: '/whatsapp/automation'
+      preLoaderRoute: typeof AuthenticatedWhatsappAutomationRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+  }
+}
+
+interface AuthenticatedRouteRouteChildren {
   AuthenticatedAppointmentsRoute: typeof AuthenticatedAppointmentsRoute
   AuthenticatedClientsRoute: typeof AuthenticatedClientsRoute
   AuthenticatedInventoryRoute: typeof AuthenticatedInventoryRoute
@@ -218,110 +339,7 @@ export interface RootRouteChildren {
   AuthenticatedWhatsappIndexRoute: typeof AuthenticatedWhatsappIndexRoute
 }
 
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/_authenticated/': {
-      id: '/_authenticated/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/settings': {
-      id: '/_authenticated/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/services': {
-      id: '/_authenticated/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof AuthenticatedServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/reports': {
-      id: '/_authenticated/reports'
-      path: '/reports'
-      fullPath: '/reports'
-      preLoaderRoute: typeof AuthenticatedReportsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/payments': {
-      id: '/_authenticated/payments'
-      path: '/payments'
-      fullPath: '/payments'
-      preLoaderRoute: typeof AuthenticatedPaymentsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/marketing': {
-      id: '/_authenticated/marketing'
-      path: '/marketing'
-      fullPath: '/marketing'
-      preLoaderRoute: typeof AuthenticatedMarketingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/inventory': {
-      id: '/_authenticated/inventory'
-      path: '/inventory'
-      fullPath: '/inventory'
-      preLoaderRoute: typeof AuthenticatedInventoryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/clients': {
-      id: '/_authenticated/clients'
-      path: '/clients'
-      fullPath: '/clients'
-      preLoaderRoute: typeof AuthenticatedClientsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/appointments': {
-      id: '/_authenticated/appointments'
-      path: '/appointments'
-      fullPath: '/appointments'
-      preLoaderRoute: typeof AuthenticatedAppointmentsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/whatsapp/': {
-      id: '/_authenticated/whatsapp/'
-      path: '/whatsapp'
-      fullPath: '/whatsapp/'
-      preLoaderRoute: typeof AuthenticatedWhatsappIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/whatsapp/templates': {
-      id: '/_authenticated/whatsapp/templates'
-      path: '/whatsapp/templates'
-      fullPath: '/whatsapp/templates'
-      preLoaderRoute: typeof AuthenticatedWhatsappTemplatesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/whatsapp/logs': {
-      id: '/_authenticated/whatsapp/logs'
-      path: '/whatsapp/logs'
-      fullPath: '/whatsapp/logs'
-      preLoaderRoute: typeof AuthenticatedWhatsappLogsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/whatsapp/campaigns': {
-      id: '/_authenticated/whatsapp/campaigns'
-      path: '/whatsapp/campaigns'
-      fullPath: '/whatsapp/campaigns'
-      preLoaderRoute: typeof AuthenticatedWhatsappCampaignsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/whatsapp/automation': {
-      id: '/_authenticated/whatsapp/automation'
-      path: '/whatsapp/automation'
-      fullPath: '/whatsapp/automation'
-      preLoaderRoute: typeof AuthenticatedWhatsappAutomationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-  }
-}
-
-const rootRouteChildren: RootRouteChildren = {
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAppointmentsRoute: AuthenticatedAppointmentsRoute,
   AuthenticatedClientsRoute: AuthenticatedClientsRoute,
   AuthenticatedInventoryRoute: AuthenticatedInventoryRoute,
@@ -336,6 +354,13 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedWhatsappLogsRoute: AuthenticatedWhatsappLogsRoute,
   AuthenticatedWhatsappTemplatesRoute: AuthenticatedWhatsappTemplatesRoute,
   AuthenticatedWhatsappIndexRoute: AuthenticatedWhatsappIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+const rootRouteChildren: RootRouteChildren = {
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
