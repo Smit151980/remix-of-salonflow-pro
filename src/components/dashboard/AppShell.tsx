@@ -63,6 +63,27 @@ const nav: Array<{
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const fetchMe = useServerFn(getCurrentUser);
+  const { data: me } = useQuery({ queryKey: ["current-user"], queryFn: () => fetchMe() });
+
+  const initials = (me?.fullName ?? me?.email ?? "U")
+    .split(/\s+/)
+    .map((p) => p[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+  const primaryRole = me?.roles?.[0] ?? null;
+
+  async function handleSignOut() {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    toast.success("Signed out");
+    navigate({ to: "/auth", replace: true });
+  }
+
 
   return (
     <div className="min-h-screen bg-background text-foreground">
