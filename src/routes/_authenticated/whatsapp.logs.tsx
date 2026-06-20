@@ -11,7 +11,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Search } from "lucide-react";
 import { mockLogs } from "@/lib/mock-data";
 
-export const Route = createFileRoute("/whatsapp/logs")({
+export const Route = createFileRoute("/_authenticated/whatsapp/logs")({
   head: () => ({ meta: [{ title: "Campaign Logs · Harshil's Salon Suite" }] }),
   component: () => <AppShell><LogsPage /></AppShell>,
 });

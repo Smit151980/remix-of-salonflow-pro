@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Plus, Clock, IndianRupee, Tag } from "lucide-react";
 import { mockServices } from "@/lib/mock-data";
 
-export const Route = createFileRoute("/services")({
+export const Route = createFileRoute("/_authenticated/services")({
   head: () => ({ meta: [{ title: "Services · Harshil's Salon Suite" }] }),
   component: () => <AppShell><ServicesPage /></AppShell>,
 });

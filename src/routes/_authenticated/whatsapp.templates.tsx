@@ -14,7 +14,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Plus, Copy, Edit, Trash2 } from "lucide-react";
 import { mockTemplates } from "@/lib/mock-data";
 
-export const Route = createFileRoute("/whatsapp/templates")({
+export const Route = createFileRoute("/_authenticated/whatsapp/templates")({
   head: () => ({ meta: [{ title: "WhatsApp Templates · Harshil's Salon Suite" }] }),
   component: () => <AppShell><TemplatesPage /></AppShell>,
 });

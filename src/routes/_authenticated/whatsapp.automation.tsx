@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Plus, Zap, Cake, Clock, CalendarX, CheckCircle2 } from "lucide-react";
 
-export const Route = createFileRoute("/whatsapp/automation")({
+export const Route = createFileRoute("/_authenticated/whatsapp/automation")({
   head: () => ({ meta: [{ title: "Automation · Harshil's Salon Suite" }] }),
   component: () => <AppShell><AutomationPage /></AppShell>,
 });

@@ -1,4 +1,7 @@
 import { useRealtimeSubscription } from "@/hooks/use-realtime";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { getDashboardStats, getCurrentUser } from "@/lib/dashboard.functions";
 import {
   Area,
   AreaChart,
@@ -90,12 +93,9 @@ const chartColors = [
   "var(--chart-5)",
 ];
 
-const kpis = [
-  { label: "Revenue today", value: "₹41,200", delta: 12.4, icon: IndianRupee, up: true },
-  { label: "Appointments", value: "33", delta: 8.1, icon: CalendarCheck2, up: true },
-  { label: "New clients", value: "9", delta: -3.2, icon: Users, up: false },
-  { label: "Retention rate", value: "68%", delta: 2.6, icon: Repeat, up: true },
-];
+function formatINR(n: number) {
+  return `₹${n.toLocaleString("en-IN")}`;
+}
 
 function statusBadge(s: string) {
   if (s === "confirmed")
@@ -121,13 +121,33 @@ export function Dashboard() {
   useRealtimeSubscription("appointments");
   useRealtimeSubscription("payments");
   useRealtimeSubscription("whatsapp_campaigns");
+
+  const fetchStats = useServerFn(getDashboardStats);
+  const fetchMe = useServerFn(getCurrentUser);
+  const { data: stats, isLoading: statsLoading } = useQuery({
+    queryKey: ["dashboard-stats"],
+    queryFn: () => fetchStats(),
+  });
+  const { data: me } = useQuery({
+    queryKey: ["current-user"],
+    queryFn: () => fetchMe(),
+  });
+
+  const firstName = (me?.fullName ?? me?.email ?? "there").split(" ")[0].split("@")[0];
+  const kpis = [
+    { label: "Revenue today", value: formatINR(stats?.todayRevenue ?? 0), icon: IndianRupee },
+    { label: "Appointments today", value: String(stats?.appointmentsToday ?? 0), icon: CalendarCheck2 },
+    { label: "New clients this month", value: String(stats?.newCustomersThisMonth ?? 0), icon: Users },
+    { label: "Pending bookings", value: String(stats?.pendingAppointments ?? 0), icon: Repeat },
+  ];
+
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Good morning, Harshil</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">Welcome back, {firstName}</h1>
           <p className="text-sm text-muted-foreground">
-            Here's how Harshil's Salon is doing today — Saturday, 20 Jun 2026.
+            Live statistics from your salon database.
           </p>
         </div>
         <div className="flex gap-2">
@@ -138,6 +158,10 @@ export function Dashboard() {
             <Plus className="size-4 mr-2" /> New appointment
           </Button>
         </div>
+      </div>
+
+      <div className="rounded-lg border border-dashed border-border bg-muted/30 px-4 py-3 text-sm text-muted-foreground">
+        Charts and lists below show example data until appointments, payments and inventory are wired up in the next build phases.
       </div>
 
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
@@ -152,16 +176,16 @@ export function Dashboard() {
                     <Icon className="size-4" />
                   </div>
                 </div>
-                <div className="mt-3 text-2xl font-semibold tracking-tight">{k.value}</div>
-                <div className={`mt-1 inline-flex items-center text-xs ${k.up ? "text-emerald-600" : "text-rose-600"}`}>
-                  {k.up ? <ArrowUpRight className="size-3.5 mr-1" /> : <ArrowDownRight className="size-3.5 mr-1" />}
-                  {Math.abs(k.delta)}% vs last week
+                <div className="mt-3 text-2xl font-semibold tracking-tight">
+                  {statsLoading ? "—" : k.value}
                 </div>
+                <div className="mt-1 text-xs text-muted-foreground">Live from database</div>
               </CardContent>
             </Card>
           );
         })}
       </div>
+
 
       <div className="grid gap-4 lg:grid-cols-3">
         <Card className="lg:col-span-2">

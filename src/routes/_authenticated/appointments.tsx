@@ -13,7 +13,7 @@ import { Plus, Search, Calendar as CalIcon } from "lucide-react";
 import { mockAppointments } from "@/lib/mock-data";
 import { useRealtimeSubscription } from "@/hooks/use-realtime";
 
-export const Route = createFileRoute("/appointments")({
+export const Route = createFileRoute("/_authenticated/appointments")({
   head: () => ({ meta: [{ title: "Appointments · Harshil's Salon Suite" }] }),
   component: () => (
     <AppShell>
