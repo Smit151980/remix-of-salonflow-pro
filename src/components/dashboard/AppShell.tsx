@@ -158,10 +158,32 @@ export function AppShell({ children }: { children: ReactNode }) {
                 <Bell className="size-5" />
                 <span className="absolute top-2 right-2 size-2 rounded-full bg-primary" />
               </Button>
-              <Avatar className="size-9">
-                <AvatarFallback className="bg-primary text-primary-foreground">HS</AvatarFallback>
-              </Avatar>
-            </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="rounded-full focus:outline-none focus:ring-2 focus:ring-ring">
+                    <Avatar className="size-9">
+                      {me?.avatarUrl ? <img src={me.avatarUrl} alt="" /> : null}
+                      <AvatarFallback className="bg-primary text-primary-foreground">{initials}</AvatarFallback>
+                    </Avatar>
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel>
+                    <div className="font-medium truncate">{me?.fullName ?? me?.email ?? "Account"}</div>
+                    {primaryRole ? (
+                      <div className="text-xs text-muted-foreground capitalize">{primaryRole}</div>
+                    ) : null}
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => navigate({ to: "/settings" })}>
+                    <Settings className="size-4 mr-2" /> Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleSignOut} className="text-rose-600 focus:text-rose-600">
+                    <LogOut className="size-4 mr-2" /> Sign out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
           </header>
           <div className="px-4 lg:px-8 py-6">{children}</div>
         </main>
