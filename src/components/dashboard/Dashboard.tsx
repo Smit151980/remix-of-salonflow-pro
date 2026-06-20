@@ -1,4 +1,7 @@
 import { useRealtimeSubscription } from "@/hooks/use-realtime";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { getDashboardStats, getCurrentUser } from "@/lib/dashboard.functions";
 import {
   Area,
   AreaChart,
