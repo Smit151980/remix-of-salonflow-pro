@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from "recharts";
 import { Megaphone, TrendingUp, IndianRupee, Users } from "lucide-react";
 
-export const Route = createFileRoute("/marketing")({
+export const Route = createFileRoute("/_authenticated/marketing")({
   head: () => ({ meta: [{ title: "Marketing · Harshil's Salon Suite" }] }),
   component: () => <AppShell><MarketingPage /></AppShell>,
 });

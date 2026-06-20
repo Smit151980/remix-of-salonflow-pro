@@ -9,7 +9,7 @@ import { Download, Plus } from "lucide-react";
 import { mockPayments } from "@/lib/mock-data";
 import { useRealtimeSubscription } from "@/hooks/use-realtime";
 
-export const Route = createFileRoute("/payments")({
+export const Route = createFileRoute("/_authenticated/payments")({
   head: () => ({ meta: [{ title: "Payments · Harshil's Salon Suite" }] }),
   component: () => <AppShell><PaymentsPage /></AppShell>,
 });

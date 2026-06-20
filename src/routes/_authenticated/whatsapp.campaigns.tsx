@@ -13,7 +13,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Plus, Play, CalendarClock } from "lucide-react";
 import { mockCampaigns, mockTemplates } from "@/lib/mock-data";
 
-export const Route = createFileRoute("/whatsapp/campaigns")({
+export const Route = createFileRoute("/_authenticated/whatsapp/campaigns")({
   head: () => ({ meta: [{ title: "Campaigns · Harshil's Salon Suite" }] }),
   component: () => <AppShell><CampaignsPage /></AppShell>,
 });

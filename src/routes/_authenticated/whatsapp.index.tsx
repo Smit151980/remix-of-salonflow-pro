@@ -8,7 +8,7 @@ import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, Res
 import { MessageCircle, Send, CheckCheck, Eye, XCircle, FileText, Zap } from "lucide-react";
 import { mockWhatsAppAnalytics, mockCampaigns } from "@/lib/mock-data";
 
-export const Route = createFileRoute("/whatsapp/")({
+export const Route = createFileRoute("/_authenticated/whatsapp/")({
   head: () => ({ meta: [{ title: "WhatsApp · Harshil's Salon Suite" }] }),
   component: () => <AppShell><WhatsAppHome /></AppShell>,
 });

@@ -12,7 +12,7 @@ import { Plus, Search, Crown, UserPlus, Cake } from "lucide-react";
 import { mockClients } from "@/lib/mock-data";
 import { useRealtimeSubscription } from "@/hooks/use-realtime";
 
-export const Route = createFileRoute("/clients")({
+export const Route = createFileRoute("/_authenticated/clients")({
   head: () => ({ meta: [{ title: "Clients · Harshil's Salon Suite" }] }),
   component: () => <AppShell><ClientsPage /></AppShell>,
 });

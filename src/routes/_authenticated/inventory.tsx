@@ -10,7 +10,7 @@ import { Plus, AlertTriangle } from "lucide-react";
 import { mockInventory } from "@/lib/mock-data";
 import { useRealtimeSubscription } from "@/hooks/use-realtime";
 
-export const Route = createFileRoute("/inventory")({
+export const Route = createFileRoute("/_authenticated/inventory")({
   head: () => ({ meta: [{ title: "Inventory · Harshil's Salon Suite" }] }),
   component: () => <AppShell><InventoryPage /></AppShell>,
 });

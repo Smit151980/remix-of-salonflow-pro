@@ -8,7 +8,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Bar, BarChart, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from "recharts";
 import { Download, FileSpreadsheet, FileText } from "lucide-react";
 
-export const Route = createFileRoute("/reports")({
+export const Route = createFileRoute("/_authenticated/reports")({
   head: () => ({ meta: [{ title: "Reports · Harshil's Salon Suite" }] }),
   component: () => <AppShell><ReportsPage /></AppShell>,
 });
