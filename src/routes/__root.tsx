@@ -81,10 +81,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Live salon CRM with appointments, clients, payments, inventory and WhatsApp marketing automation." },
       { name: "author", content: "Harshil's Salon Suite" },
       { property: "og:title", content: "Harshil's Salon Suite" },
-      { property: "og:description", content: "Run your salon end-to-end with real-time KPIs and WhatsApp automation." },
+      { property: "og:description", content: "Live salon CRM with appointments, clients, payments, inventory and WhatsApp marketing automation." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Harshil's Salon Suite" },
+      { name: "twitter:description", content: "Live salon CRM with appointments, clients, payments, inventory and WhatsApp marketing automation." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/aab5fd3e-39e2-4077-bfd9-63d1550f83b8/id-preview-46efb08f--ed586e4c-2199-4ab5-8705-a5c20c00e200.lovable.app-1782022230392.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/aab5fd3e-39e2-4077-bfd9-63d1550f83b8/id-preview-46efb08f--ed586e4c-2199-4ab5-8705-a5c20c00e200.lovable.app-1782022230392.png" },
     ],
     links: [
       {
