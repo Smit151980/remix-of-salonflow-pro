@@ -14,6 +14,86 @@ export type Database = {
   }
   public: {
     Tables: {
+      customer_notes: {
+        Row: {
+          author_id: string | null
+          created_at: string
+          customer_id: string
+          id: string
+          note: string
+          updated_at: string
+        }
+        Insert: {
+          author_id?: string | null
+          created_at?: string
+          customer_id: string
+          id?: string
+          note: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string | null
+          created_at?: string
+          customer_id?: string
+          id?: string
+          note?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "customer_notes_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      customers: {
+        Row: {
+          address: string | null
+          created_at: string
+          date_of_birth: string | null
+          email: string | null
+          full_name: string
+          gender: string | null
+          id: string
+          loyalty_points: number
+          marketing_opt_in: boolean
+          phone: string | null
+          tags: string[]
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          email?: string | null
+          full_name: string
+          gender?: string | null
+          id?: string
+          loyalty_points?: number
+          marketing_opt_in?: boolean
+          phone?: string | null
+          tags?: string[]
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          email?: string | null
+          full_name?: string
+          gender?: string | null
+          id?: string
+          loyalty_points?: number
+          marketing_opt_in?: boolean
+          phone?: string | null
+          tags?: string[]
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -43,6 +123,201 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      service_categories: {
+        Row: {
+          active: boolean
+          created_at: string
+          id: string
+          name: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          id?: string
+          name: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          id?: string
+          name?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          active: boolean
+          category_id: string | null
+          created_at: string
+          description: string | null
+          duration_minutes: number
+          id: string
+          name: string
+          price: number
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          category_id?: string | null
+          created_at?: string
+          description?: string | null
+          duration_minutes?: number
+          id?: string
+          name: string
+          price?: number
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          category_id?: string | null
+          created_at?: string
+          description?: string | null
+          duration_minutes?: number
+          id?: string
+          name?: string
+          price?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "services_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "service_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      staff: {
+        Row: {
+          active: boolean
+          color: string | null
+          commission_pct: number
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          phone: string | null
+          role_title: string | null
+          specialties: string[]
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          active?: boolean
+          color?: string | null
+          commission_pct?: number
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          phone?: string | null
+          role_title?: string | null
+          specialties?: string[]
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          active?: boolean
+          color?: string | null
+          commission_pct?: number
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          phone?: string | null
+          role_title?: string | null
+          specialties?: string[]
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      staff_leaves: {
+        Row: {
+          created_at: string
+          end_date: string
+          id: string
+          reason: string | null
+          staff_id: string
+          start_date: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          end_date: string
+          id?: string
+          reason?: string | null
+          staff_id: string
+          start_date: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          end_date?: string
+          id?: string
+          reason?: string | null
+          staff_id?: string
+          start_date?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "staff_leaves_staff_id_fkey"
+            columns: ["staff_id"]
+            isOneToOne: false
+            referencedRelation: "staff"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      staff_schedules: {
+        Row: {
+          created_at: string
+          day_of_week: number
+          end_time: string
+          id: string
+          staff_id: string
+          start_time: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          day_of_week: number
+          end_time: string
+          id?: string
+          staff_id: string
+          start_time: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          day_of_week?: number
+          end_time?: string
+          id?: string
+          staff_id?: string
+          start_time?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "staff_schedules_staff_id_fkey"
+            columns: ["staff_id"]
+            isOneToOne: false
+            referencedRelation: "staff"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {

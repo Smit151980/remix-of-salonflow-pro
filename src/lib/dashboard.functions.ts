@@ -14,15 +14,21 @@ export type DashboardStats = {
 
 export const getDashboardStats = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
-  .handler(async (): Promise<DashboardStats> => {
-    // Tables come online in later phases; return zeros until then.
+  .handler(async ({ context }): Promise<DashboardStats> => {
+    const { supabase } = context;
+    const now = new Date();
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+    const [{ count: totalCustomers }, { count: newCustomersThisMonth }] = await Promise.all([
+      supabase.from("customers").select("id", { count: "exact", head: true }),
+      supabase.from("customers").select("id", { count: "exact", head: true }).gte("created_at", monthStart),
+    ]);
     return {
       todayRevenue: 0,
       monthRevenue: 0,
       appointmentsToday: 0,
       appointmentsThisWeek: 0,
-      totalCustomers: 0,
-      newCustomersThisMonth: 0,
+      totalCustomers: totalCustomers ?? 0,
+      newCustomersThisMonth: newCustomersThisMonth ?? 0,
       pendingAppointments: 0,
       lowStockCount: 0,
     };
