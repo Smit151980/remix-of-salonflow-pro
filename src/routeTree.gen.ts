@@ -13,6 +13,7 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedStaffRouteImport } from './routes/_authenticated/staff'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedServicesRouteImport } from './routes/_authenticated/services'
 import { Route as AuthenticatedReportsRouteImport } from './routes/_authenticated/reports'
@@ -44,6 +45,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedStaffRoute = AuthenticatedStaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
@@ -130,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/reports': typeof AuthenticatedReportsRoute
   '/services': typeof AuthenticatedServicesRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/staff': typeof AuthenticatedStaffRoute
   '/whatsapp/automation': typeof AuthenticatedWhatsappAutomationRoute
   '/whatsapp/campaigns': typeof AuthenticatedWhatsappCampaignsRoute
   '/whatsapp/logs': typeof AuthenticatedWhatsappLogsRoute
@@ -147,6 +154,7 @@ export interface FileRoutesByTo {
   '/reports': typeof AuthenticatedReportsRoute
   '/services': typeof AuthenticatedServicesRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/staff': typeof AuthenticatedStaffRoute
   '/': typeof AuthenticatedIndexRoute
   '/whatsapp/automation': typeof AuthenticatedWhatsappAutomationRoute
   '/whatsapp/campaigns': typeof AuthenticatedWhatsappCampaignsRoute
@@ -167,6 +175,7 @@ export interface FileRoutesById {
   '/_authenticated/reports': typeof AuthenticatedReportsRoute
   '/_authenticated/services': typeof AuthenticatedServicesRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/staff': typeof AuthenticatedStaffRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/whatsapp/automation': typeof AuthenticatedWhatsappAutomationRoute
   '/_authenticated/whatsapp/campaigns': typeof AuthenticatedWhatsappCampaignsRoute
@@ -188,6 +197,7 @@ export interface FileRouteTypes {
     | '/reports'
     | '/services'
     | '/settings'
+    | '/staff'
     | '/whatsapp/automation'
     | '/whatsapp/campaigns'
     | '/whatsapp/logs'
@@ -205,6 +215,7 @@ export interface FileRouteTypes {
     | '/reports'
     | '/services'
     | '/settings'
+    | '/staff'
     | '/'
     | '/whatsapp/automation'
     | '/whatsapp/campaigns'
@@ -224,6 +235,7 @@ export interface FileRouteTypes {
     | '/_authenticated/reports'
     | '/_authenticated/services'
     | '/_authenticated/settings'
+    | '/_authenticated/staff'
     | '/_authenticated/'
     | '/_authenticated/whatsapp/automation'
     | '/_authenticated/whatsapp/campaigns'
@@ -266,6 +278,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/staff': {
+      id: '/_authenticated/staff'
+      path: '/staff'
+      fullPath: '/staff'
+      preLoaderRoute: typeof AuthenticatedStaffRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/settings': {
@@ -371,6 +390,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedReportsRoute: typeof AuthenticatedReportsRoute
   AuthenticatedServicesRoute: typeof AuthenticatedServicesRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedStaffRoute: typeof AuthenticatedStaffRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedWhatsappAutomationRoute: typeof AuthenticatedWhatsappAutomationRoute
   AuthenticatedWhatsappCampaignsRoute: typeof AuthenticatedWhatsappCampaignsRoute
@@ -388,6 +408,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedReportsRoute: AuthenticatedReportsRoute,
   AuthenticatedServicesRoute: AuthenticatedServicesRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedStaffRoute: AuthenticatedStaffRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedWhatsappAutomationRoute: AuthenticatedWhatsappAutomationRoute,
   AuthenticatedWhatsappCampaignsRoute: AuthenticatedWhatsappCampaignsRoute,
