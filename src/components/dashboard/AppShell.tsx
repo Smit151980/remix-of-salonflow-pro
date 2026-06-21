@@ -50,6 +50,7 @@ const nav: Array<{
   { label: "Appointments", icon: CalendarDays, to: "/appointments" },
   { label: "Clients", icon: Users, to: "/clients" },
   { label: "Services", icon: Scissors, to: "/services" },
+  { label: "Staff", icon: UserCog, to: "/staff" },
   { label: "Inventory", icon: Package, to: "/inventory" },
   { label: "Payments", icon: CreditCard, to: "/payments" },
   { label: "WhatsApp", icon: MessageCircle, to: "/whatsapp", badge: 3, group: "WhatsApp" },
